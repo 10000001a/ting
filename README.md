@@ -1,100 +1,37 @@
-# ting
+# 캠쿠
 
+<img src="https://drive.google.com/uc?export=view&id=1-NBjcIeHYzHLyuvsKw2qAMWMXpb1f5Cs" width="60%" height="100%"/>
 
-## 개발환경 설정
-### postgresql 설치
-```
-$ brew install postgresql
+## 소개
 
-$ echo '# for postgresql' >> ~/.zprofile
-$ echo 'export PATH="/usr/local/opt/krb5/bin:$PATH"' >> ~/.zprofile
-$ echo 'export PATH="/usr/local/opt/krb5/sbin:$PATH"' >> ~/.zprofile
+캠쿠는 같은 학교 학우들이 직접 작성한 자기 자신에 대한 소개글을 보고 관심이 있는 상대에게 호감을 표시할 수 있는 학교 내 셀소 플랫폼입니다.
 
-$ pg_ctl -D /usr/local/var/postgres start
-$ export PGDATA='/usr/local/var/postgres'
-$ pg_ctl status
+[frontend repository](https://github.com/10000001a/ting-front).
+[backend repository](https://github.com/10000001a/ting).
 
-$ initdb /usr/local/var/postgres
+|구현 화면|설명|
+|---|---|
+|<img src="https://drive.google.com/uc?export=view&id=1-NM-5d8QM5Z-sajalgw-E64uOlnqBV29" width="80%" height="100%"/>|<b>회원가입</b><br/><br/>- 이메일로 본인 인증을 해야 다음 스텝으로 넘어갈 수 있습니다.<br/><br/>- 사용자는 자신이 재학 및 휴학중인 학교 이메일을 사용하여 가입해야 합니다.<br/><br/>- 가입한 이메일을 통해 인증 링크를 전송하여 사용자의 학교를 인증합니다.|
+|<img src="https://drive.google.com/uc?export=view&id=1-OA0wz4EAiSoDjVNHoTM0W8ufVkzvpjH" width="80%" height="100%"/>|<b>프로필 정보 입력</b><br/><br/>- 자신의 프로필 정보를 입력합니다.<br/><br/>- 총 4개의 스텝으로 이루어져 있습니다.<br/><br/>- 외모, 성격, 취미, 연애관, 이상형과 같은 내용을 상세하게 입력해야합니다.<br/><br/>- 입력한 정보들은 사용자간의 상호 동의하에 공개됩니다.|
+|<img src="https://drive.google.com/uc?export=view&id=1-U1jCp1OIZGmPfzRODoHwG6u5ZgQFbQ0" width="80%" height="100%"/>|<b>메인 페이지</b><br/><br/>- 본인 프로필 작성이 완료되면 모든 학우들에게 공개를 허용한 프로필들이 나타납니다.<br/><br/>- 프로필, 나이, 본인을 나타낼 수 있는 키워드 등이 나타납니다.|
+|<img src="https://drive.google.com/uc?export=view&id=1-haaK-5pmhPKwFJvaeGLhTjCyOrxurxq" width="80%" height="100%"/>|<b>상세 페이지</b><br/><br/>- 관심이 있는 상대에 대한 프로필을 클릭하면 더 상세한 정보들을 확인할 수 있습니다.<br/><br/>- 상대의 프로필을 읽고 관심이 있다면 포인트를 소모하여 상대의 오픈 채팅방 링크를 얻을 수 있습니다.|
 
-$ createuser --interactive --pwprompt
-# role 이름: root
-# superuser
+## 기술 스택
 
-$ createuser --interactive --pwprompt
-# role 이름: postgres
-# 모든 권한 주지 않음
+### FrontEnd
 
-$ psql -U postgres
-postgres=> CREATE DATABASE hongaeting_test;
+- React
+- MobX
+- Sass
 
-$ psql -U root -d hongaeting_test
-hongaeting_test=# ALTER ROLE postgres CREATEDB;
+### BackEnd
 
-```
+- Django
+- PostgreSQL
 
-### trouble shooting
-```
-# db client 관련 문제
-# https://stackoverflow.com/questions/44084846/cannot-connect-to-the-docker-daemon-on-macos
-env LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib" pip install psycopg2==2.8.4
+### Devops
 
-# ubuntu에서는
-#sudo apt-get install python-psycopg2
-sudo apt install libpq-dev python3-dev # 이게 되는듯?!
-```
+- AWS EC2
+- AWS S3
+- NginX
 
-#### pyenv 설치 (with pyenv-installer)
-```
-$ curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-$ exec $SHELL
-```
-
-#### trouble shooting
-```
-# $ curl https://pyenv.run | bash 가 제대로 동작하지 않음
-```
-
-#### ~/.zprofile 파일 가장 아래 아래의 명령어 추가 후 $ source ~/.zprofile
-```
-# for pyenv
-export PATH="/Users/${user-account-name}/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-```
-
-#### 가상환경 설정
-```
-$ pyenv install 3.7.6
-
-$ pyenv virtualenv 3.7.6 {project-name}-env
-
-$ mkdir {project-name}
-
-$ cd /{project-name}
-
-$ pyenv local {project-name}-env
-```
-
-#### django 세팅 
-```
-$ git pull https://github.com/maitracle/ting.git
-
-$ pip install --upgrade pip
-
-$ pip install -r requirements.txt
-
-$ cd hongaeting
-
-$ python manage.py migreate
-```
-
-#### 환경변수 설정
-```
-repository root directory에 .env 파일을 추가한다.
-파일 내용은 동료에게 개인적으로 전달받는다.
-```
-
-#### run
-```
-$ python manage.py runserver 0.0.0.0:8000
-```
