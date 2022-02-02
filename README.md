@@ -6,8 +6,9 @@
 
 캠쿠는 같은 학교 학우들이 직접 작성한 자기 자신에 대한 소개글을 보고 관심이 있는 상대에게 호감을 표시할 수 있는 학교 내 셀소 플랫폼입니다.
 
-[frontend repository](https://github.com/10000001a/ting-front).
-[backend repository](https://github.com/10000001a/ting).
+☞ [**프론트엔드 저장소**](https://github.com/10000001a/ting-front)
+
+☞ [**백엔드 저장소**](https://github.com/10000001a/ting)
 
 |구현 화면|설명|
 |---|---|
